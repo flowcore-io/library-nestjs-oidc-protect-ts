@@ -1,0 +1,32 @@
+name: Test
+
+on:
+  push:
+    branches-ignore: [ "main" ]
+
+env:
+  NODE_VERSION: ">=18.12.1"
+
+jobs:
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        token: 
+        submodules: true
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3.5.1
+      with:
+        node-version: ""
+        cache: yarn
+    - name: Yarn install
+      run: |
+        yarn install --frozen-lockfile
+    - name: Lint
+      run: yarn lint
+    - name: Test
+      run: yarn test --passWithNoTests

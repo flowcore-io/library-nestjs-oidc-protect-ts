@@ -1,0 +1,52 @@
+name: Build and Publish NPM Package
+
+on:
+  release:
+    types: [ published ]
+
+env:
+  NODE_VERSION: ">=18.12.1"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: 
+          submodules: true
+      - name: Extract version from package.json
+        uses: sergeysova/jq-action@v2
+        id: version
+        with:
+          cmd: 'jq .version package.json -r'
+
+      - name: Show my version
+        run: 'echo "version "'
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: ""
+          registry-url: "https://registry.npmjs.org"
+          cache: yarn
+      - name: Yarn install
+        run: |
+          yarn install --frozen-lockfile
+      - name: Lint
+        run: yarn lint
+      - name: Test
+        run: yarn test --passWithNoTests
+      - name: Build
+        run: yarn build
+      - name: Publish
+        run: yarn publish --access public --non-interactive --new-version 
+        env:
+          NODE_AUTH_TOKEN: 
