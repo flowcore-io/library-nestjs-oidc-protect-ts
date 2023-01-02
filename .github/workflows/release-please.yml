@@ -10,15 +10,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          token: 
+          token: ${{ secrets.FLOWCORE_MACHINE_GITHUB_TOKEN }}
           submodules: true
-      - name: Extract version from package.json
+      - name: Extract package name from package.json
         uses: sergeysova/jq-action@v2
         id: package
         with:
           cmd: 'jq .name package.json -r'
       - uses: google-github-actions/release-please-action@v3
         with:
-          token: 
+          token: ${{ secrets.FLOWCORE_MACHINE_GITHUB_TOKEN }}
           release-type: node
-          package-name: 
+          package-name: ${{ steps.package.outputs.value }}

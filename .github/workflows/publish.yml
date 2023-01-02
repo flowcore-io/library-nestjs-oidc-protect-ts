@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          token: 
+          token: ${{ secrets.FLOWCORE_MACHINE_GITHUB_TOKEN }}
           submodules: true
       - name: Extract version from package.json
         uses: sergeysova/jq-action@v2
@@ -29,12 +29,12 @@ jobs:
           cmd: 'jq .version package.json -r'
 
       - name: Show my version
-        run: 'echo "version "'
+        run: 'echo "version ${{ steps.version.outputs.value }}"'
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v3.5.1
         with:
-          node-version: ""
+          node-version: "${{ env.NODE_VERSION }}"
           registry-url: "https://registry.npmjs.org"
           cache: yarn
       - name: Yarn install
@@ -47,6 +47,6 @@ jobs:
       - name: Build
         run: yarn build
       - name: Publish
-        run: yarn publish --access public --non-interactive --new-version 
+        run: yarn publish --access decorator --non-interactive --new-version ${{ steps.version.outputs.value }}
         env:
-          NODE_AUTH_TOKEN: 
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

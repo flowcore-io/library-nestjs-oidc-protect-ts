@@ -2,10 +2,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: nestjs-oidc-protect
+  name: nestjs-library
   description: A NestJS OpenID Connect library that can validate a token and protect routes with Auth and Role Guards
   annotations:
-    github.com/project-slug: flowcore-io/library-nestjs-oidc-protect-ts
+    github.com/project-slug: flowcore-io/library-nestjs-library-ts
 spec:
   type: library
   owner: backend
