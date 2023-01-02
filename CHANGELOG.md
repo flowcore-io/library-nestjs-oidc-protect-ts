@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.0.0 (2023-01-02)
+
+
+### Features
+
+* added documentation ([4ef9944](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/4ef9944f32a69ee6b0bd8cc573e27e482edaa93e))
+* added oidc validation and role guards ([f6d17e5](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/f6d17e5ed1479f4f5dd8ecd7e2102059504758b4))
+
+
+### Bug Fixes
+
+* fixed incorrect name and missing description ([d27052b](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/d27052b64bc389a147d4ded806ffa485b8067d39))
+* fixed installation part of documentation ([c48cef4](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/c48cef48b1fdaf0ada6af25e122dceebd77932fa))
+
 ## [2.3.0](https://github.com/flowcore-io/library-flowcore-microservice-ts/compare/v2.2.0...v2.3.0) (2022-12-21)
 
 
