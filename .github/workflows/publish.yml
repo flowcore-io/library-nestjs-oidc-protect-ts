@@ -52,6 +52,6 @@ jobs:
       - name: Build
         run: yarn build
       - name: Publish
-        run: yarn publish --access decorator --non-interactive --new-version ${{ steps.version.outputs.value }}
+        run: yarn publish --access public --non-interactive --new-version ${{ steps.version.outputs.value }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
