@@ -9,4 +9,5 @@ metadata:
 spec:
   type: library
   owner: backend
+  system: auth-libraries
   lifecycle: experimental
