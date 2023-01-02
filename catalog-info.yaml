@@ -6,6 +6,9 @@ metadata:
   description: A NestJS OpenID Connect library that can validate a token and protect routes with Auth and Role Guards
   annotations:
     github.com/project-slug: flowcore-io/library-nestjs-oidc-protect-ts
+  links:
+    - url: https://www.npmjs.com/package/@flowcore/nestjs-oidc-protect
+      title: Library NPM Link
 spec:
   type: library
   owner: backend
