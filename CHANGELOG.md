@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v1.0.0...v1.0.1) (2023-01-02)
+
+
+### Bug Fixes
+
+* added keycloak docker step to publish action ([d99f690](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/d99f6905dc05e916bc130fce34e0a57d732558c7))
+
 ## 1.0.0 (2023-01-02)
 
 
