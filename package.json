@@ -1,5 +1,6 @@
 {
   "name": "@flowcore/nestjs-oidc-protect",
+  "description": "A NestJS OpenID Connect library that can validate a token and protect routes with Auth and Role Guards",
   "license": "MIT",
   "version": "2.3.0",
   "type": "commonjs",
