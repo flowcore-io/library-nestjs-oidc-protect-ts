@@ -10,13 +10,13 @@ use the [@flowcore/microservice](https://www.npmjs.com/package/@flowcore/microse
 install with npm:
 
 ```bash
-npm install @flowcore/nestjs-library @flowcore/microservice
+npm install @flowcore/nestjs-oidc-protect @flowcore/microservice
 ```
 
 or yarn:
 
 ```bash
-yarn add @flowcore/nestjs-library @flowcore/microservice
+yarn add @flowcore/nestjs-oidc-protect @flowcore/microservice
 ```
 
 > If you are using GraphQL, you also need to install the `@nestjs/graphql` package.
@@ -26,7 +26,7 @@ yarn add @flowcore/nestjs-library @flowcore/microservice
 Import the OidcProtectModule into your NestJS application and configure it with your Keycloak server's details:
 
 ```typescript
-import {OidcProtectModuleBuilder, OidcProtectConfigurationSchema} from '@flowcore/oidc-protect';
+import {OidcProtectModuleBuilder, OidcProtectConfigurationSchema} from '@flowcore/nestjs-oidc-protect';
 import {ConfigModule, ConfigFactory} from '@flowcore/microservice';
 import {AuthGuardBuilder} from "./auth-guard.builder";
 
@@ -57,7 +57,7 @@ The `AuthGuard` is global and will protect all routes by default. You can use th
 routes from the AuthGuard.
 
 ```typescript
-import {Public} from '@flowcore/oidc-protect';
+import {Public} from '@flowcore/nestjs-oidc-protect';
 import {Controller, Get} from '@nestjs/common';
 
 @Controller()
@@ -74,7 +74,7 @@ You can also use the `@Roles()` decorator to protect routes with a RoleGuard. Th
 roles. If the user has one of the roles, the route will be accessible.
 
 ```typescript
-import {Roles} from '@flowcore/oidc-protect';
+import {Roles} from '@flowcore/nestjs-oidc-protect';
 import {Controller, Get} from '@nestjs/common';
 
 @Controller()
