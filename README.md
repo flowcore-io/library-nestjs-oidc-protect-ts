@@ -5,14 +5,6 @@
 A NestJS OpenID Connect library that can validate a token and protect routes with Auth and Role Guards. This is build to
 use the [@flowcore/microservice](https://www.npmjs.com/package/@flowcore/microservice) library for configuration.
 
-```mermaid
-  graph TD;
-      A-->B;
-      A-->C;
-      B-->D;
-      C-->D;
-```
-
 ## Installation
 
 install with npm:
