@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v1.0.1...v1.0.2) (2023-01-02)
+
+
+### Bug Fixes
+
+* fixed publish step ([3315b5f](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/3315b5f0dd7fec619f44ccebe0079f169bc2c808))
+
 ## [1.0.1](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v1.0.0...v1.0.1) (2023-01-02)
 
 
