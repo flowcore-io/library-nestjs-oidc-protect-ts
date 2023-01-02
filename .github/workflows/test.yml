@@ -30,6 +30,6 @@ jobs:
         run: yarn lint
       - name: Start Keycloak
         run: |
-          docker-compose -f test/docker/docker-compose.yml up -d
+          docker-compose -f test/docker/docker-compose.yaml up -d
       - name: Test
         run: yarn test --passWithNoTests
