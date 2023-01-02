@@ -42,6 +42,11 @@ jobs:
           yarn install --frozen-lockfile
       - name: Lint
         run: yarn lint
+      - name: Start Keycloak
+        run: |
+          docker-compose -f test/docker/docker-compose.yaml up -d
+          chmod +x test/docker/await-testing.sh
+          test/docker/await-testing.sh
       - name: Test
         run: yarn test --passWithNoTests
       - name: Build
