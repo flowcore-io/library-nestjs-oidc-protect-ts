@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v1.0.2...v1.1.0) (2023-01-03)
+
+
+### Features
+
+* added environment config documentation to package ([26024d5](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/26024d50cca8efb577c665706e3a7916ddd40b48))
+
 ## [1.0.2](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v1.0.1...v1.0.2) (2023-01-02)
 
 
