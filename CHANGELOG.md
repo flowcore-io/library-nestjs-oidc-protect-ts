@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v1.1.0...v1.1.1) (2023-01-03)
+
+
+### Bug Fixes
+
+* removed unused dependencies ([4a79b91](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/4a79b9198f83da7e4ca42417358b41ec47e8ad57))
+
 ## [1.1.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v1.0.2...v1.1.0) (2023-01-03)
 
 
