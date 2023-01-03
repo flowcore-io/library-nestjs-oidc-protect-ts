@@ -95,10 +95,7 @@ export class OidcProtectService implements OnApplicationBootstrap {
       this.logger.error(`No ResourceId specified, so role check is disabled`);
       return false;
     }
-    return this.validateRole(
-      realmRoles,
-      requiredRole.replace("resource:", `${this.resourceId}:`),
-    );
+    return this.validateRole(realmRoles, `${this.resourceId}:${requiredRole}`);
   }
 
   validateRealmRole(realmRoles: string[], requiredRole: string) {
@@ -106,9 +103,7 @@ export class OidcProtectService implements OnApplicationBootstrap {
   }
 
   extractRealmRoles(decodedToken: any) {
-    return (
-      decodedToken?.realm_access?.roles?.map((role) => `realm:${role}`) || []
-    );
+    return decodedToken?.realm_access?.roles || [];
   }
 
   extractResourceRoles(decodedToken: any) {

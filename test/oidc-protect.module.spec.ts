@@ -45,7 +45,10 @@ const config = ConfigModule.forRoot(
       }),
     }),
   ],
-  providers: [TestResolver, ...new AuthGuardBuilder().usingRoleGuard().build()],
+  providers: [
+    TestResolver,
+    ...new AuthGuardBuilder().usingRoleGuard().usingResourceGuard().build(),
+  ],
 })
 class AppModule {}
 
@@ -186,10 +189,34 @@ describe("OIDC Protect Module", () => {
     expect(response.body.data.realmRole).toBe("realmRole");
   });
 
+  it("should return forbidden with no access to resource role", async () => {
+    const token = await (
+      await app.resolve(KeycloakPrepService)
+    ).getUserToken(UserType.NO_ACCESS_USER);
+
+    const response = await queryGraphQLEndpoint(
+      app,
+      gql`
+        query {
+          resourceRole
+        }
+      `,
+      token,
+    );
+
+    expect(
+      response.body.errors.find(
+        (errorItem) =>
+          errorItem.message.match(/Forbidden/) &&
+          errorItem.extensions.response.statusCode === 403,
+      ),
+    ).toBeTruthy();
+  });
+
   it("should pass with valid access to resource role", async () => {
     const token = await (
       await app.resolve(KeycloakPrepService)
-    ).getUserToken(UserType.TEST_USER);
+    ).getUserToken(UserType.RESOURCE_ACCESS_USER);
 
     const response = await queryGraphQLEndpoint(
       app,

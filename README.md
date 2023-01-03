@@ -26,9 +26,9 @@ yarn add @flowcore/nestjs-oidc-protect @flowcore/microservice
 Import the OidcProtectModule into your NestJS application and configure it with your Keycloak server's details:
 
 ```typescript
-import {OidcProtectModuleBuilder, OidcProtectConfigurationSchema} from '@flowcore/nestjs-oidc-protect';
-import {ConfigModule, ConfigFactory} from '@flowcore/microservice';
-import {AuthGuardBuilder} from "./auth-guard.builder";
+import { OidcProtectModuleBuilder, OidcProtectConfigurationSchema } from '@flowcore/nestjs-oidc-protect';
+import { ConfigModule, ConfigFactory } from '@flowcore/microservice';
+import { AuthGuardBuilder } from "./auth-guard.builder";
 
 const config = ConfigModule.forRoot(
   new ConfigFactory()
@@ -44,7 +44,10 @@ const config = ConfigModule.forRoot(
     new OidcProtectModuleBuilder().withConfig(config).build(),
   ],
   providers: [
-    ...new AuthGuardBuilder().usingRoleGuard().build(),
+    ...new AuthGuardBuilder()
+      .usingRoleGuard()
+      .usingResourceGuard()
+      .build(),
   ],
 })
 export class AppModule {
@@ -64,8 +67,8 @@ The `AuthGuard` is global and will protect all routes by default. You can use th
 routes from the AuthGuard.
 
 ```typescript
-import {Public} from '@flowcore/nestjs-oidc-protect';
-import {Controller, Get} from '@nestjs/common';
+import { Public } from '@flowcore/nestjs-oidc-protect';
+import { Controller, Get } from '@nestjs/common';
 
 @Controller()
 export class AppController {
@@ -77,19 +80,23 @@ export class AppController {
 }
 ```
 
-You can also use the `@Roles()` decorator to protect routes with a RoleGuard. The `@Roles()` decorator accepts a list of
+You can also use the `@RealmRoles()` or `@ResourceRoles` decorators to protect routes with a RoleGuard.
+The `@RealmRoles()` and `@ResourceRoles()` decorators accepts a list of
 roles. If the user has one of the roles, the route will be accessible.
 
 ```typescript
-import {Roles} from '@flowcore/nestjs-oidc-protect';
-import {Controller, Get} from '@nestjs/common';
+import { Roles } from '@flowcore/nestjs-oidc-protect';
+import { Controller, Get } from '@nestjs/common';
 
 @Controller()
 export class AppController {
   @Get()
-  @Roles({
-    roles: ['realm:admin', 'resource:write'],
-  })
+  @RealmRoles(['admin', 'write'])
+  getHello(): string {
+    return 'Hello World!';
+  }
+
+  @ResourceRoles(['read', 'write'])
   getHello(): string {
     return 'Hello World!';
   }
@@ -101,6 +108,8 @@ the `resource_access` claim will never go through and will fail the guard.
 
 > The `resource` roles refer to the `resource_access` field in the token. The `realm` roles refer to the `realm_access`
 > field in the token.
+
+> It is not possible to use `@RealmRoles()` and `@ResourceRoles()` on the same route.
 
 We hope you find this library useful in your NestJS projects!
 
