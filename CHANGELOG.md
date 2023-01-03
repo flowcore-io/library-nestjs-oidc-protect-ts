@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v1.1.1...v2.0.0) (2023-01-03)
+
+
+### ⚠ BREAKING CHANGES
+
+* Changed the decorator input type from RoleDefinition to simpler array of strings, removing the need for specifying "realm:" or "resource:"
+
+### Features
+
+* split resource and realm roles to simplify adding roles ([c8aaf67](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/c8aaf6761baf9064be572fbb780fa358d3413a2e))
+
 ## [1.1.1](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v1.1.0...v1.1.1) (2023-01-03)
 
 
