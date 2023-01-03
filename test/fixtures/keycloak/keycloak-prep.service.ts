@@ -10,6 +10,7 @@ export const CLIENT_ROLE = "client-role";
 export enum UserType {
   TEST_USER,
   NO_ACCESS_USER,
+  RESOURCE_ACCESS_USER,
 }
 
 @Injectable()
@@ -46,6 +47,12 @@ export class KeycloakPrepService implements OnApplicationBootstrap {
           userData = {
             username: "no-access",
             password: "no-access",
+          };
+          break;
+        case UserType.RESOURCE_ACCESS_USER:
+          userData = {
+            username: "resource-access",
+            password: "resource-access",
           };
           break;
       }
@@ -180,6 +187,32 @@ export class KeycloakPrepService implements OnApplicationBootstrap {
         );
       }
 
+      if (
+        !userResponse.data.find((user) => user.username === "resource-access")
+      ) {
+        await axios.post(
+          this.options.get().baseUrl + "/admin/realms/master/users",
+          {
+            username: "resource-access",
+            enabled: true,
+            emailVerified: true,
+            firstName: "resource-access",
+            lastName: "resource-access",
+            credentials: [
+              {
+                type: "password",
+                value: "resource-access",
+              },
+            ],
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.accessToken}`,
+            },
+          },
+        );
+      }
+
       const { data } = await axios.get(`${baseUrl}/admin/realms/master/users`, {
         headers: {
           Authorization: `Bearer ${this.accessToken}`,
@@ -187,10 +220,31 @@ export class KeycloakPrepService implements OnApplicationBootstrap {
       });
 
       const user = data.find((user) => user.username === "test");
+      const resourceUser = data.find(
+        (user) => user.username === "resource-access",
+      );
 
       await axios.post(
         this.options.get().baseUrl +
           `/admin/realms/master/users/${user.id}/role-mappings/clients/${clientId}`,
+        [
+          {
+            id: clientRoleId,
+            clientRole: true,
+            composite: false,
+            name: CLIENT_ROLE,
+          },
+        ],
+        {
+          headers: {
+            Authorization: `Bearer ${this.accessToken}`,
+          },
+        },
+      );
+
+      await axios.post(
+        this.options.get().baseUrl +
+          `/admin/realms/master/users/${resourceUser.id}/role-mappings/clients/${clientId}`,
         [
           {
             id: clientRoleId,

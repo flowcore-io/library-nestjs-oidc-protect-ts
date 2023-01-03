@@ -3,11 +3,11 @@ import { InjectLogger, LoggerService } from "@flowcore/microservice";
 import { OidcProtectService } from "../oidc-protect/oidc-protect.service";
 import { Reflector } from "@nestjs/core";
 import { PUBLIC_OPERATION_KEY } from "../decorator/public.decorator";
-import { OPERATION_REALM_ROLES_REQUIRED } from "../decorator/realm-roles.decorator";
 import * as _ from "lodash";
+import { OPERATION_RESOURCE_ROLES_REQUIRED } from "../decorator/resource-roles.decorator";
 
 @Injectable()
-export class RoleGuard implements CanActivate {
+export class ResourceGuard implements CanActivate {
   constructor(
     @InjectLogger() private readonly logger: LoggerService,
     private readonly oidcProtect: OidcProtectService,
@@ -24,12 +24,12 @@ export class RoleGuard implements CanActivate {
       return true;
     }
 
-    const requiredRealmRoles = this.getRoles(
+    const requiredResourceRoles = this.getRoles(
       context,
-      OPERATION_REALM_ROLES_REQUIRED,
+      OPERATION_RESOURCE_ROLES_REQUIRED,
     );
 
-    if (!requiredRealmRoles) {
+    if (!requiredResourceRoles) {
       return true;
     }
 
@@ -37,10 +37,10 @@ export class RoleGuard implements CanActivate {
 
     const { decodedToken } = this.oidcProtect.extractTokens(headers);
 
-    const realmRoles = this.oidcProtect.extractRealmRoles(decodedToken);
+    const resourceRoles = this.oidcProtect.extractResourceRoles(decodedToken);
 
-    return _.some(requiredRealmRoles, (role) =>
-      this.oidcProtect.validateRealmRole(realmRoles, role),
+    return _.some(requiredResourceRoles, (role) =>
+      this.oidcProtect.validateResourceRole(resourceRoles, role),
     );
   }
 
