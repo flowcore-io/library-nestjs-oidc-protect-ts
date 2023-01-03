@@ -51,6 +51,13 @@ export class AppModule {
 }
 ```
 
+This can then be configured in a service with the following environment variables
+
+| Environment Variable | Description                                                                                    | Default Value | Required |
+|----------------------|------------------------------------------------------------------------------------------------|---------------|:--------:|
+| OIDC_WELLKNOWN_URL   | The wellknown configuration endpoint value for the authentication server                       |               |    X     |
+| OIDC_RESOURCE_ID     | The resource ID configured for this service, this is required for `resource_access` validation |               |          |
+
 ## Usage
 
 The `AuthGuard` is global and will protect all routes by default. You can use the `@Public()` decorator to exclude
