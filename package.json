@@ -83,25 +83,17 @@
     }
   },
   "dependencies": {
-    "@golevelup/nestjs-discovery": "3.0.0",
     "@jbiskur/nestjs-async-module": "3.11.0",
     "@jbiskur/nestjs-options-module-factory": "3.11.0",
-    "@nestjs/axios": "1.0.1",
     "@types/dotenv": "8.2.0",
     "@types/lodash": "4.14.191",
-    "@willsoto/nestjs-prometheus": "5.0.0",
     "axios": "1.2.2",
     "dayjs": "1.11.7",
-    "dd-trace": "3.9.3",
     "dotenv": "16.0.3",
     "jwt-decode": "3.1.2",
     "lodash": "4.17.21",
-    "nest-winston": "1.8.0",
-    "nestjs-ddtrace": "3.0.2",
-    "prom-client": "14.1.0",
     "reflect-metadata": "0.1.13",
-    "rxjs": "7.8.0",
-    "winston": "3.8.2"
+    "rxjs": "7.8.0"
   },
   "peerDependencies": {
     "@nestjs/graphql": "^10.1.7",
