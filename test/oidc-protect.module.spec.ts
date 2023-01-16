@@ -23,6 +23,7 @@ import {
 import { DocumentNode, print } from "graphql/language";
 import gql from "graphql-tag";
 import * as path from "path";
+import { WellKnownController } from "./fixtures/wellknown.controller";
 
 const config = ConfigModule.forRoot(
   new ConfigFactory().withSchema(OidcProtectConfigurationSchema),
@@ -45,6 +46,7 @@ const config = ConfigModule.forRoot(
       }),
     }),
   ],
+  controllers: [WellKnownController],
   providers: [
     TestResolver,
     ...new AuthGuardBuilder().usingRoleGuard().usingResourceGuard().build(),
@@ -134,7 +136,7 @@ describe("OIDC Protect Module", () => {
     expect(response.body.data.test).toBe("test");
   });
 
-  it("should pass for public operation", async () => {
+  it("should pass for public decorated endpoints", async () => {
     const response = await queryGraphQLEndpoint(
       app,
       gql`
@@ -145,6 +147,12 @@ describe("OIDC Protect Module", () => {
     );
 
     expect(response.body.data.public).toBe("public");
+  });
+
+  it("should pass for built-in public endpoints", async () => {
+    await supertest(app.getHttpServer()).get("/health").expect(200);
+    await supertest(app.getHttpServer()).get("/metrics").expect(200);
+    await supertest(app.getHttpServer()).get("/not-known").expect(401);
   });
 
   it("should return forbidden with no access to realm role", async () => {

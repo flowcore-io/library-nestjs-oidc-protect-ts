@@ -19,6 +19,12 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    const { request, headers } = await this.oidcProtect.extractRequest(context);
+
+    if (this.oidcProtect.isPublicEndpoint(request?.path)) {
+      return true;
+    }
+
     const isPublic = this.reflector.getAllAndOverride<boolean>(
       PUBLIC_OPERATION_KEY,
       [context.getHandler(), context.getClass()],
@@ -28,7 +34,9 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    const { request, headers } = await this.oidcProtect.extractRequest(context);
+    if (!headers.authorization) {
+      throw new HttpException("No authorization header found", 401);
+    }
 
     const { token, decodedToken } = this.oidcProtect.extractTokens(headers);
 
