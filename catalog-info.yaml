@@ -16,5 +16,5 @@ spec:
   lifecycle: experimental
 
   dependsOn:
-    - Component/flowcore-microservice
-    - Component/testing-flowcore-microservice
+    - component:flowcore-microservice
+    - component:testing-flowcore-microservice
