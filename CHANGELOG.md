@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v2.0.0...v2.0.1) (2023-01-16)
+
+
+### Bug Fixes
+
+* added missing auth guard builder dependencies ([1017fe1](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/1017fe15dee8b63f9bbb49cb4c604af275d8b075))
+
 ## [2.0.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v1.1.1...v2.0.0) (2023-01-03)
 
 
