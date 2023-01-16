@@ -14,3 +14,7 @@ spec:
   owner: backend
   system: auth-libraries
   lifecycle: experimental
+
+  dependsOn:
+    - Component/flowcore-microservice
+    - Component/testing-flowcore-microservice
