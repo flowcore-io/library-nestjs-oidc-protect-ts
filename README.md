@@ -111,6 +111,33 @@ the `resource_access` claim will never go through and will fail the guard.
 
 > It is not possible to use `@RealmRoles()` and `@ResourceRoles()` on the same route.
 
+For public endpoints like `/health` or `/metrics` you can use the built-in public endpoints are used to keep these paths
+open. If you want to override these defaults or disable them, you can do so by configuring the `OidcProtectModule` using
+the `OidcProtectModuleBuilder`:
+
+```typescript
+@Module({
+  imports: [
+    config,
+    // ...other modules
+    new OidcProtectModuleBuilder()
+      .withConfig(config)
+      .noPublicEndpoints() // for disabling the built-in public endpoints
+      .overridePublicEndpoints(
+        [
+          '/health',
+          '/metrics',
+          '/healthz',
+        ],
+      )
+      .build(),
+  ],
+  // ... other provider, controllers etc.
+})
+export class AppModule {
+}
+```
+
 We hope you find this library useful in your NestJS projects!
 
 ## Development

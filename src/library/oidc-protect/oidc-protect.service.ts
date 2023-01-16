@@ -38,6 +38,12 @@ export class OidcProtectService implements OnApplicationBootstrap {
     }
   }
 
+  public isPublicEndpoint(endpoint: string) {
+    const { wellKnownPublicEndpoints } = this.options.get();
+
+    return wellKnownPublicEndpoints?.includes(endpoint);
+  }
+
   async onApplicationBootstrap() {
     const { wellKnownUrl, resourceId } = this.options.get();
 
@@ -84,9 +90,6 @@ export class OidcProtectService implements OnApplicationBootstrap {
 
     const { headers } = request;
 
-    if (!headers.authorization) {
-      throw new HttpException("No authorization header found", 401);
-    }
     return { request, headers };
   }
 

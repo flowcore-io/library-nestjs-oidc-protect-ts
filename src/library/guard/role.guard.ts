@@ -1,4 +1,9 @@
-import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
+import {
+  CanActivate,
+  ExecutionContext,
+  HttpException,
+  Injectable,
+} from "@nestjs/common";
 import { InjectLogger, LoggerService } from "@flowcore/microservice";
 import { OidcProtectService } from "../oidc-protect/oidc-protect.service";
 import { Reflector } from "@nestjs/core";
@@ -34,6 +39,10 @@ export class RoleGuard implements CanActivate {
     }
 
     const { headers } = await this.oidcProtect.extractRequest(context);
+
+    if (!headers.authorization) {
+      throw new HttpException("No authorization header found", 401);
+    }
 
     const { decodedToken } = this.oidcProtect.extractTokens(headers);
 
