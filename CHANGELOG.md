@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v2.0.1...v2.1.0) (2023-01-16)
+
+
+### Features
+
+* added support for built-in public endpoints ([26ac114](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/26ac114bf376b3007865c05a7e5740671c661b92))
+* bumped packaged version ([a298fd6](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/a298fd6fcf5105bf27d872809316bffa662409a1))
+
 ## [2.0.1](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v2.0.0...v2.0.1) (2023-01-16)
 
 
