@@ -6,6 +6,7 @@ import {
   ConfigService,
 } from "@flowcore/microservice";
 import {
+  AuthGuardBuilder,
   OidcProtectConfigurationSchema,
   OidcProtectModuleBuilder,
 } from "../src";
@@ -22,7 +23,6 @@ import {
 import { DocumentNode, print } from "graphql/language";
 import gql from "graphql-tag";
 import * as path from "path";
-import { AuthGuardBuilder } from "../src/library/builder/auth-guard.builder";
 
 const config = ConfigModule.forRoot(
   new ConfigFactory().withSchema(OidcProtectConfigurationSchema),
