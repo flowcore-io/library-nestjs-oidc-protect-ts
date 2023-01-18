@@ -1,7 +1,11 @@
-import { Query, Resolver } from "@nestjs/graphql";
-import { Public, RealmRoles } from "../../src";
+import { GqlExecutionContext, Query, Resolver } from "@nestjs/graphql";
+import {
+  AuthenticatedUser,
+  Public,
+  RealmRoles,
+  ResourceRoles,
+} from "../../src";
 import { CLIENT_ROLE, REALM_ROLE } from "./keycloak/keycloak-prep.service";
-import { ResourceRoles } from "../../src/library/decorator/resource-roles.decorator";
 
 @Resolver()
 export class TestResolver {
@@ -28,5 +32,13 @@ export class TestResolver {
   @Query(() => String, { name: "resourceRole" })
   public resourceRole(): string {
     return "resourceRole";
+  }
+
+  @RealmRoles([REALM_ROLE])
+  @Query(() => String, { name: "authenticatedUser" })
+  public authenticatedUser(
+    @AuthenticatedUser(GqlExecutionContext) user: any,
+  ): string {
+    return user.preferred_username;
   }
 }

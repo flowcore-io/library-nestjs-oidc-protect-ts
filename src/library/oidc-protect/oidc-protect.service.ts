@@ -11,6 +11,8 @@ import { OidcProtectModuleOptions } from "../interface/oidc-protect-module-optio
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
+let gqlExecutionContext: any = null;
+
 @Injectable()
 export class OidcProtectService implements OnApplicationBootstrap {
   private userInfoEndpoint: string = null;
@@ -21,6 +23,23 @@ export class OidcProtectService implements OnApplicationBootstrap {
     @InjectLogger() private readonly logger: LoggerService,
     private readonly options: ModuleOptions<OidcProtectModuleOptions>,
   ) {}
+
+  public static async getRequest(context: ExecutionContext) {
+    if (context.getType<ContextType | "graphql">() === "graphql") {
+      try {
+        if (!gqlExecutionContext) {
+          gqlExecutionContext = (await import("@nestjs/graphql"))
+            .GqlExecutionContext;
+        }
+        return gqlExecutionContext.create(context).getContext().req;
+      } catch (err) {
+        throw new Error(
+          "context is GraphQL but @nestjs/graphql package is installed",
+        );
+      }
+    }
+    return context.switchToHttp().getRequest();
+  }
 
   async validateToken(token: string) {
     try {
@@ -86,7 +105,7 @@ export class OidcProtectService implements OnApplicationBootstrap {
   }
 
   async extractRequest(context: ExecutionContext) {
-    const request = await this.getRequest(context);
+    const request = await OidcProtectService.getRequest(context);
 
     const { headers } = request;
 
@@ -115,21 +134,6 @@ export class OidcProtectService implements OnApplicationBootstrap {
         (role) => `${this.resourceId}:${role}`,
       ) || []
     );
-  }
-
-  private async getRequest(context: ExecutionContext) {
-    if (context.getType<ContextType | "graphql">() === "graphql") {
-      try {
-        const GqlExecutionContext = (await import("@nestjs/graphql"))
-          .GqlExecutionContext;
-        return GqlExecutionContext.create(context).getContext().req;
-      } catch (err) {
-        throw new Error(
-          "context is GraphQL but @nestjs/graphql package is installed",
-        );
-      }
-    }
-    return context.switchToHttp().getRequest();
   }
 
   private validateRole(roles: string[], requiredRole: string) {

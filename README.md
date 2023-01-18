@@ -138,6 +138,25 @@ export class AppModule {
 }
 ```
 
+To get access to the user information in the request, you can use the `@AuthenticatedUser()` decorator:
+
+```typescript
+import { AuthenticatedUser } from '@flowcore/nestjs-oidc-protect';
+import { Roles } from '@flowcore/nestjs-oidc-protect';
+import { Controller, Get } from '@nestjs/common';
+
+@Controller()
+export class AppController {
+  @Get()
+  @RealmRoles(['admin', 'write'])
+  getHello(@AuthenticatedUser() user: any /* change to match your token */): string {
+    return 'Hello World!';
+  }
+}
+```
+
+> This also works with @Resolvers() in GraphQL.
+
 We hope you find this library useful in your NestJS projects!
 
 ## Development

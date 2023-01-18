@@ -401,8 +401,6 @@ export class KeycloakPrepService implements OnApplicationBootstrap {
         },
       );
 
-      console.log(result);
-
       return result.data.id;
     } else {
       return role.id;

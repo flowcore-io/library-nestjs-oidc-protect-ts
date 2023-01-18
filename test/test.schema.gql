@@ -7,4 +7,5 @@ type Query {
   public: String!
   realmRole: String!
   resourceRole: String!
+  authenticatedUser: String!
 }

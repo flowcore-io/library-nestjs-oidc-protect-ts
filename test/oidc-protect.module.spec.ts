@@ -24,6 +24,7 @@ import { DocumentNode, print } from "graphql/language";
 import gql from "graphql-tag";
 import * as path from "path";
 import { WellKnownController } from "./fixtures/wellknown.controller";
+import jwtDecode from "jwt-decode";
 
 const config = ConfigModule.forRoot(
   new ConfigFactory().withSchema(OidcProtectConfigurationSchema),
@@ -195,6 +196,28 @@ describe("OIDC Protect Module", () => {
     );
 
     expect(response.body.data.realmRole).toBe("realmRole");
+  });
+
+  it("should get access to authenticated user", async () => {
+    const token = await (
+      await app.resolve(KeycloakPrepService)
+    ).getUserToken(UserType.TEST_USER);
+
+    const decoded: any = jwtDecode(token);
+
+    const response = await queryGraphQLEndpoint(
+      app,
+      gql`
+        query {
+          authenticatedUser
+        }
+      `,
+      token,
+    );
+
+    expect(response.body.data.authenticatedUser).toBe(
+      decoded.preferred_username,
+    );
   });
 
   it("should return forbidden with no access to resource role", async () => {
