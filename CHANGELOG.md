@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v2.1.1...v2.2.0) (2023-01-18)
+
+
+### Features
+
+* added support for getting authenticated user information ([f7c76b5](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/f7c76b5efff2d68bed96df86c8d358181055c715))
+
 ## [2.1.1](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v2.1.0...v2.1.1) (2023-01-16)
 
 
