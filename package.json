@@ -39,7 +39,7 @@
   "devDependencies": {
     "@flowcore/microservice": "3.0.0",
     "@flowcore/testing-microservice": "1.1.0",
-    "@jbiskur/nestjs-test-utilities": "3.11.0",
+    "@jbiskur/nestjs-test-utilities": "4.0.2",
     "@keycloak/keycloak-admin-client": "20.0.2",
     "@nestjs/apollo": "10.1.7",
     "@nestjs/cli": "9.1.5",
@@ -83,8 +83,8 @@
     }
   },
   "dependencies": {
-    "@jbiskur/nestjs-async-module": "3.11.0",
-    "@jbiskur/nestjs-options-module-factory": "3.11.0",
+    "@jbiskur/nestjs-async-module": "4.0.2",
+    "@jbiskur/nestjs-options-module-factory": "4.0.2",
     "@types/dotenv": "8.2.0",
     "@types/lodash": "4.14.191",
     "axios": "1.2.2",
