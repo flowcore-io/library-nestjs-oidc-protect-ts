@@ -37,7 +37,7 @@
     "reconfigure": "commitizen init cz-conventional-changelog --yarn --dev --exact --force"
   },
   "devDependencies": {
-    "@flowcore/microservice": "3.0.0",
+    "@flowcore/microservice": "3.2.0",
     "@flowcore/testing-microservice": "1.1.0",
     "@jbiskur/nestjs-test-utilities": "3.11.0",
     "@keycloak/keycloak-admin-client": "20.0.2",
