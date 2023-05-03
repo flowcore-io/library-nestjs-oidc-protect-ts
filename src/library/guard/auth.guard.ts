@@ -46,7 +46,12 @@ export class AuthGuard implements CanActivate {
       throw new HttpException("Token is expired", 401);
     }
 
-    if (!(await this.oidcProtect.validateToken(token))) {
+    if (
+      !(await this.oidcProtect.validateToken(
+        token,
+        dayjs.unix(decodedToken.exp),
+      ))
+    ) {
       throw new HttpException("Invalid authorization token", 401);
     }
 

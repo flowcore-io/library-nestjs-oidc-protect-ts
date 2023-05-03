@@ -138,6 +138,31 @@ export class AppModule {
 }
 ```
 
+to optimize the performance you can specify a cache using the `withCache()` method on the `OidcProtectModuleBuilder`:
+
+```typescript
+import { CACHE_MANAGER, CacheModule } from "@nestjs/cache-manager";
+
+const cacheModule = CacheModule.register();
+
+@Module({
+  imports: [
+    config,
+    // ...other modules
+    cacheModule,
+    new OidcProtectModuleBuilder()
+      .withConfig(config)
+      .withCache(cacheModule, CACHE_MANAGER)
+      .build(),
+  ],
+  // ... other provider, controllers etc.
+})
+export class AppModule {
+}
+```
+
+> This supports the same cache managers as the `@nestjs/cache-manager` module.
+
 To get access to the user information in the request, you can use the `@AuthenticatedUser()` decorator:
 
 ```typescript

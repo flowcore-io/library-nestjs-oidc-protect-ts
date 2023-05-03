@@ -10,6 +10,9 @@ import { ModuleOptions } from "@jbiskur/nestjs-async-module";
 import { OidcProtectModuleOptions } from "../interface/oidc-protect-module-options.interface";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+import { ICache } from "../interface/cache.interface";
+import md5 from "md5";
+import dayjs from "dayjs";
 
 let gqlExecutionContext: any = null;
 
@@ -18,6 +21,7 @@ export class OidcProtectService implements OnApplicationBootstrap {
   private userInfoEndpoint: string = null;
   private roleAvailable = true;
   private resourceId: string = null;
+  private cacheManager: ICache = null;
 
   constructor(
     @InjectLogger() private readonly logger: LoggerService,
@@ -41,13 +45,28 @@ export class OidcProtectService implements OnApplicationBootstrap {
     return context.switchToHttp().getRequest();
   }
 
-  async validateToken(token: string) {
+  async validateToken(token: string, expirationDate: dayjs.Dayjs) {
     try {
+      if (this.cacheManager) {
+        const cached = await this.cacheManager.get(md5(token));
+        if (cached) {
+          return true;
+        }
+      }
+
       const { status } = await axios.get(this.userInfoEndpoint, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+
+      if (status === 200 && this.cacheManager) {
+        await this.cacheManager.set(
+          md5(token),
+          "true",
+          dayjs().diff(expirationDate.subtract(1, "minute"), "millisecond"),
+        );
+      }
 
       return status === 200;
     } catch (error) {
@@ -81,6 +100,10 @@ export class OidcProtectService implements OnApplicationBootstrap {
     }
 
     this.resourceId = resourceId;
+
+    if (this.options.get().cache) {
+      this.cacheManager = this.options.get().cache;
+    }
   }
 
   extractTokens(headers: any) {
@@ -95,7 +118,7 @@ export class OidcProtectService implements OnApplicationBootstrap {
     try {
       decodedToken = jwtDecode(token);
     } catch (error) {
-      this.logger.error(error as string, {
+      this.logger.error(`Failed to decode token: ${token}`, {
         error,
       });
 

@@ -2,10 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type TestPerson {
+  id: ID!
+  firstName: String
+  lastName: String
+  fullName: String
+}
+
 type Query {
   test: String!
   public: String!
   realmRole: String!
   resourceRole: String!
   authenticatedUser: String!
+  testPerson: TestPerson!
 }
