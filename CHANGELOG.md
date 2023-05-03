@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v2.2.0...v2.3.0) (2023-05-03)
+
+
+### Features
+
+* added cache and support for guards on resource guards with tests ([c8057c1](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/c8057c107a86d22c63bd308baacc40328e6e3394))
+
 ## [2.2.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v2.1.1...v2.2.0) (2023-01-18)
 
 
