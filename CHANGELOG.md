@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v2.4.0...v3.0.0) (2023-05-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* updated dependencies to latest versions of nestjs 9, changed exceptions to be 401 and 403 respectively
+
+### Features
+
+* updated to latest version of nestjs 9 and @nestjs/graphql 11 ([2e13b42](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/2e13b42c4effedead6b28923e940f61245a82a71))
+
 ## [2.4.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v2.3.0...v2.4.0) (2023-05-26)
 
 
