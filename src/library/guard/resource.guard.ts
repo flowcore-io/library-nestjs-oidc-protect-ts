@@ -1,6 +1,7 @@
 import {
   CanActivate,
   ExecutionContext,
+  ForbiddenException,
   HttpException,
   Injectable,
 } from "@nestjs/common";
@@ -48,9 +49,18 @@ export class ResourceGuard implements CanActivate {
 
     const resourceRoles = this.oidcProtect.extractResourceRoles(decodedToken);
 
-    return _.some(requiredResourceRoles, (role) =>
+    const hasAccess = _.some(requiredResourceRoles, (role) =>
       this.oidcProtect.validateResourceRole(resourceRoles, role),
     );
+
+    if (!hasAccess) {
+      throw new ForbiddenException(
+        "Invalid authorization token",
+        "User does not have access to this resource",
+      );
+    }
+
+    return true;
   }
 
   private getRoles(context: ExecutionContext, metadataKey: string) {

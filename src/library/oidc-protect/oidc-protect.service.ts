@@ -1,9 +1,9 @@
 import {
   ContextType,
   ExecutionContext,
-  HttpException,
   Injectable,
   OnApplicationBootstrap,
+  UnauthorizedException,
 } from "@nestjs/common";
 import { InjectLogger, LoggerService } from "@flowcore/microservice";
 import { ModuleOptions } from "@jbiskur/nestjs-async-module";
@@ -110,7 +110,10 @@ export class OidcProtectService implements OnApplicationBootstrap {
     const [bearer, token] = headers.authorization.split(" ");
 
     if (bearer !== "Bearer") {
-      throw new HttpException("Invalid authorization header", 401);
+      throw new UnauthorizedException(
+        "Invalid authorization header",
+        "Bearer token expected",
+      );
     }
 
     let decodedToken: any;
@@ -122,7 +125,10 @@ export class OidcProtectService implements OnApplicationBootstrap {
         error,
       });
 
-      throw new HttpException("Invalid authorization token", 401);
+      throw new UnauthorizedException(
+        "Invalid authorization token",
+        "Failed to decode token",
+      );
     }
     return { token, decodedToken };
   }

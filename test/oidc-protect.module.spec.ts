@@ -103,7 +103,7 @@ async function queryGraphQLEndpoint(
     sut.set("Authorization", `Bearer ${token}`);
   }
 
-  return sut.send({
+  return await sut.send({
     query: print(query),
   });
 }
@@ -135,7 +135,7 @@ describe("OIDC Protect Module", () => {
         response.body.errors.find(
           (errorItem) =>
             errorItem.message.match(/No authorization/) &&
-            errorItem.extensions.exception.status === 401,
+            errorItem.extensions.originalError.statusCode === 401,
         ),
       ).toBeTruthy();
     });
@@ -155,7 +155,7 @@ describe("OIDC Protect Module", () => {
         response.body.errors.find(
           (errorItem) =>
             errorItem.message.match(/Invalid authorization/) &&
-            errorItem.extensions.exception.status === 401,
+            errorItem.extensions.originalError.statusCode === 401,
         ),
       ).toBeTruthy();
     });
@@ -181,7 +181,7 @@ describe("OIDC Protect Module", () => {
         response.body.errors.find(
           (errorItem) =>
             errorItem.message.match(/Invalid authorization/) &&
-            errorItem.extensions.exception.status === 401,
+            errorItem.extensions.originalError.statusCode === 401,
         ),
       ).toBeTruthy();
     });
@@ -240,8 +240,8 @@ describe("OIDC Protect Module", () => {
       expect(
         response.body.errors.find(
           (errorItem) =>
-            errorItem.message.match(/Forbidden/) &&
-            errorItem.extensions.response.statusCode === 403,
+            errorItem.message.match(/Invalid/) &&
+            errorItem.extensions.originalError.statusCode === 403,
         ),
       ).toBeTruthy();
     });
@@ -304,8 +304,8 @@ describe("OIDC Protect Module", () => {
       expect(
         response.body.errors.find(
           (errorItem) =>
-            errorItem.message.match(/Forbidden/) &&
-            errorItem.extensions.response.statusCode === 403,
+            errorItem.message.match(/Invalid/) &&
+            errorItem.extensions.originalError.statusCode === 403,
         ),
       ).toBeTruthy();
     });
@@ -359,7 +359,7 @@ describe("OIDC Protect Module", () => {
         response.body.errors.find(
           (errorItem) =>
             errorItem.message.match(/No authorization/) &&
-            errorItem.extensions.exception.status === 401,
+            errorItem.extensions.originalError.statusCode === 401,
         ),
       ).toBeTruthy();
     });

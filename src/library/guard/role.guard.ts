@@ -1,8 +1,9 @@
 import {
   CanActivate,
   ExecutionContext,
-  HttpException,
+  ForbiddenException,
   Injectable,
+  UnauthorizedException,
 } from "@nestjs/common";
 import { InjectLogger, LoggerService } from "@flowcore/microservice";
 import { OidcProtectService } from "../oidc-protect/oidc-protect.service";
@@ -41,16 +42,25 @@ export class RoleGuard implements CanActivate {
     const { headers } = await this.oidcProtect.extractRequest(context);
 
     if (!headers.authorization) {
-      throw new HttpException("No authorization header found", 401);
+      throw new UnauthorizedException("No authorization header found");
     }
 
     const { decodedToken } = this.oidcProtect.extractTokens(headers);
 
     const realmRoles = this.oidcProtect.extractRealmRoles(decodedToken);
 
-    return _.some(requiredRealmRoles, (role) =>
+    const hasAccess = _.some(requiredRealmRoles, (role) =>
       this.oidcProtect.validateRealmRole(realmRoles, role),
     );
+
+    if (!hasAccess) {
+      throw new ForbiddenException(
+        "Invalid authorization token",
+        "User does not have roles required to access this resource",
+      );
+    }
+
+    return true;
   }
 
   private getRoles(context: ExecutionContext, metadataKey: string) {

@@ -1,8 +1,8 @@
 import {
   CanActivate,
   ExecutionContext,
-  HttpException,
   Injectable,
+  UnauthorizedException,
 } from "@nestjs/common";
 import { InjectLogger, LoggerService } from "@flowcore/microservice";
 import dayjs from "dayjs";
@@ -35,7 +35,7 @@ export class AuthGuard implements CanActivate {
     }
 
     if (!headers.authorization) {
-      throw new HttpException("No authorization header found", 401);
+      throw new UnauthorizedException("No authorization header found");
     }
 
     const { token, decodedToken } = this.oidcProtect.extractTokens(headers);
@@ -43,7 +43,7 @@ export class AuthGuard implements CanActivate {
     const isExpired = dayjs().isAfter(dayjs.unix(decodedToken.exp));
 
     if (isExpired) {
-      throw new HttpException("Token is expired", 401);
+      throw new UnauthorizedException("Token is expired");
     }
 
     if (
@@ -52,7 +52,7 @@ export class AuthGuard implements CanActivate {
         dayjs.unix(decodedToken.exp),
       ))
     ) {
-      throw new HttpException("Invalid authorization token", 401);
+      throw new UnauthorizedException("Invalid authorization token");
     }
 
     request.authenticatedUser = decodedToken;
