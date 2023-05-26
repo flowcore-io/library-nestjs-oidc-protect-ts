@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.4.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v2.3.0...v2.4.0) (2023-05-26)
+
+
+### Features
+
+* added options when fetching authenticated user ([a8ee5c4](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/a8ee5c425bc5494ed4892a6e610884d476b08866))
+
+
+### Bug Fixes
+
+* set default value for authenticated user decorator ([45e4d64](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/45e4d64aecf18b05f8c27ab6e7de18cf5d7ce09f))
+
 ## [2.3.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v2.2.0...v2.3.0) (2023-05-03)
 
 
