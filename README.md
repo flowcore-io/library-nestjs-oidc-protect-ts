@@ -180,6 +180,9 @@ export class AppController {
 }
 ```
 
+> An options object can be passed to the `@AuthenticatedUser()` decorator to specify the property name of the user and if it should be optional.
+> The default options are `{ required: true, storedIn: "authenticatedUser" }`.
+ 
 > This also works with @Resolvers() in GraphQL.
 
 We hope you find this library useful in your NestJS projects!

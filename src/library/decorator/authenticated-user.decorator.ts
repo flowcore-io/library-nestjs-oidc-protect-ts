@@ -1,14 +1,22 @@
 import { createParamDecorator, ExecutionContext } from "@nestjs/common";
 import { OidcProtectService } from "../oidc-protect/oidc-protect.service";
 
-export const AuthenticatedUser = createParamDecorator(
-  async (data: unknown, ctx: ExecutionContext) => {
+export interface AuthenticatedUserOptions {
+  required?: boolean;
+  storedIn?: string;
+}
+
+export const AuthenticatedUser = createParamDecorator<AuthenticatedUserOptions>(
+  async (
+    { required = true, storedIn = "authenticatedUser" },
+    ctx: ExecutionContext,
+  ) => {
     const request = await OidcProtectService.getRequest(ctx);
 
-    if (!request.authenticatedUser) {
+    if (!request[storedIn] && required) {
       throw new Error("AuthenticatedUser not found");
     }
 
-    return request.authenticatedUser;
+    return request[storedIn];
   },
 );
