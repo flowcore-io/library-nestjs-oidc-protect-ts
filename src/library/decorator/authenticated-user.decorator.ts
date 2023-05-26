@@ -7,11 +7,10 @@ export interface AuthenticatedUserOptions {
 }
 
 export const AuthenticatedUser = createParamDecorator<AuthenticatedUserOptions>(
-  async (
-    { required = true, storedIn = "authenticatedUser" },
-    ctx: ExecutionContext,
-  ) => {
+  async (data, ctx: ExecutionContext) => {
     const request = await OidcProtectService.getRequest(ctx);
+
+    const { required = true, storedIn = "authenticatedUser" } = data || {};
 
     if (!request[storedIn] && required) {
       throw new Error("AuthenticatedUser not found");

@@ -1,4 +1,4 @@
-import { GqlExecutionContext, Query, Resolver } from "@nestjs/graphql";
+import { Query, Resolver } from "@nestjs/graphql";
 import {
   AuthenticatedUser,
   Public,
@@ -36,9 +36,7 @@ export class TestResolver {
 
   @RealmRoles([REALM_ROLE])
   @Query(() => String, { name: "authenticatedUser" })
-  public authenticatedUser(
-    @AuthenticatedUser(GqlExecutionContext) user: any,
-  ): string {
+  public authenticatedUser(@AuthenticatedUser() user: any): string {
     return user.preferred_username;
   }
 }
