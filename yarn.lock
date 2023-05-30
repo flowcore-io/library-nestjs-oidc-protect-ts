@@ -661,23 +661,6 @@
     rxjs "7.8.0"
     winston "3.8.2"
 
-"@flowcore/nestjs-oidc-protect@3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@flowcore/nestjs-oidc-protect/-/nestjs-oidc-protect-3.2.0.tgz#44932e746c5cf9f0b1ed333b4fe9246d0418a888"
-  integrity sha512-FMguQM5JrULo3rzIQu+jrW4w3v+j9WyWHJa7soC52qy12+JewUmZCbcwJcvAu5zy/7lpQL6Fr9oSttnr69Q9Fg==
-  dependencies:
-    "@jbiskur/nestjs-async-module" "3.11.0"
-    "@jbiskur/nestjs-options-module-factory" "3.11.0"
-    "@types/lodash" "4.14.191"
-    axios "1.2.2"
-    dayjs "1.11.7"
-    dotenv "16.0.3"
-    jwt-decode "3.1.2"
-    lodash "4.17.21"
-    md5 "2.3.0"
-    reflect-metadata "0.1.13"
-    rxjs "7.8.0"
-
 "@flowcore/testing-microservice@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@flowcore/testing-microservice/-/testing-microservice-1.1.0.tgz#818c070663b7795a47d760c86e90a4a05626d95f"

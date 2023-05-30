@@ -87,7 +87,6 @@
     }
   },
   "dependencies": {
-    "@flowcore/nestjs-oidc-protect": "3.2.0",
     "@jbiskur/nestjs-async-module": "3.11.0",
     "@jbiskur/nestjs-options-module-factory": "3.11.0",
     "@types/lodash": "4.14.191",
