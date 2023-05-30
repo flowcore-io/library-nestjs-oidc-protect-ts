@@ -67,18 +67,22 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    const { token, decodedToken } = this.oidcProtect.extractTokens(headers);
+    try {
+      const { token, decodedToken } = this.oidcProtect.extractTokens(headers);
 
-    if (
-      !(await this.oidcProtect.validateToken(
-        token,
-        dayjs.unix(decodedToken.exp),
-      ))
-    ) {
+      if (
+        !(await this.oidcProtect.validateToken(
+          token,
+          dayjs.unix(decodedToken.exp),
+        ))
+      ) {
+        return true;
+      }
+
+      request.authenticatedUser = decodedToken;
+      return true;
+    } catch (e) {
       return true;
     }
-
-    request.authenticatedUser = decodedToken;
-    return true;
   }
 }
