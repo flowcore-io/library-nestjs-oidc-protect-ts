@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.2.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v3.1.0...v3.2.0) (2023-05-30)
+
+
+### Features
+
+* added back in configurable stored in variable ([4b2b085](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/4b2b085914d4eb6589295a2588e03fbb2dcf0a28))
+
+
+### Bug Fixes
+
+* updated optional token extraction to not throw exceptions ([ec24e07](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/ec24e073304f9759060c2f9da965f9f2b0d12035))
+
 ## [3.1.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v3.0.0...v3.1.0) (2023-05-30)
 
 
