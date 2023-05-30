@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v3.0.0...v3.1.0) (2023-05-30)
+
+
+### Features
+
+* added decoded token passthrough with public endpoint ([7eb5506](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/7eb5506e24e708e249385adf63787ea1e62a6eab))
+
 ## [3.0.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v2.4.0...v3.0.0) (2023-05-26)
 
 
