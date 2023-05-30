@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
     const { request, headers } = await this.oidcProtect.extractRequest(context);
 
     if (this.oidcProtect.isPublicEndpoint(request?.path)) {
-      return true;
+      return await this.extractOptionalToken(request, headers);
     }
 
     const isPublic = this.reflector.getAllAndOverride<boolean>(
@@ -31,7 +31,7 @@ export class AuthGuard implements CanActivate {
     );
 
     if (isPublic) {
-      return true;
+      return await this.extractOptionalToken(request, headers);
     }
 
     if (!headers.authorization) {
@@ -55,8 +55,30 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException("Invalid authorization token");
     }
 
+    console.log("TOKEN:", decodedToken);
+
     request.authenticatedUser = decodedToken;
 
+    return true;
+  }
+
+  private async extractOptionalToken(request: any, headers: any) {
+    if (!headers.authorization) {
+      return true;
+    }
+
+    const { token, decodedToken } = this.oidcProtect.extractTokens(headers);
+
+    if (
+      !(await this.oidcProtect.validateToken(
+        token,
+        dayjs.unix(decodedToken.exp),
+      ))
+    ) {
+      return true;
+    }
+
+    request.authenticatedUser = decodedToken;
     return true;
   }
 }
