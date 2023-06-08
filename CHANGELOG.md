@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.2.1](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v3.2.0...v3.2.1) (2023-06-08)
+
+
+### Bug Fixes
+
+* bumped nestjs-oidc-protect ([470f250](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/470f250bced44c3271fd2da37023f6d7f6e1557c))
+* removed console log ([3832eca](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/3832ecaf4102e95b4198d996c8d95fd45d8779d3))
+* removed redundant link ([0bd6ed5](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/0bd6ed5b4820930d24f6a4c8572b300bd34f79f3))
+
 ## [3.2.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v3.1.0...v3.2.0) (2023-05-30)
 
 
