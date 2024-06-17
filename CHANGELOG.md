@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v3.2.1...v3.3.0) (2024-06-17)
+
+
+### Features
+
+* add oidc-protect service to library index ([8f76c53](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/8f76c53c16a0ce1c8cda934acaae049dbd7e47e7))
+
 ## [3.2.1](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v3.2.0...v3.2.1) (2023-06-08)
 
 
