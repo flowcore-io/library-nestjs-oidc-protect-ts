@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.1](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v3.4.0...v3.4.1) (2024-12-09)
+
+
+### Bug Fixes
+
+* removed test from publish as it should not be required there ([f9bf8c7](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/f9bf8c749c4410d78a550094d884697569c28535))
+
 ## [3.4.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v3.3.0...v3.4.0) (2024-12-09)
 
 
