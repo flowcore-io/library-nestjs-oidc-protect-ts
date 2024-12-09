@@ -286,6 +286,26 @@ describe("OIDC Protect Module", () => {
       );
     });
 
+    it("should get access to token", async () => {
+      const token = await (
+        await app.resolve(KeycloakPrepService)
+      ).getUserToken(UserType.TEST_USER);
+
+      const decoded: any = jwtDecode(token);
+
+      const response = await queryGraphQLEndpoint(
+        app,
+        gql`
+          query {
+            token
+          }
+        `,
+        token,
+      );
+
+      expect(response.body.data.token).toBe(token);
+    });
+
     it("should return forbidden with no access to resource role", async () => {
       const token = await (
         await app.resolve(KeycloakPrepService)
