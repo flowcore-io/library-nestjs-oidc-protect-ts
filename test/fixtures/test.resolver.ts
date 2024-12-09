@@ -4,6 +4,7 @@ import {
   Public,
   RealmRoles,
   ResourceRoles,
+  Token,
 } from "../../src";
 import { CLIENT_ROLE, REALM_ROLE } from "./keycloak/keycloak-prep.service";
 
@@ -38,5 +39,11 @@ export class TestResolver {
   @Query(() => String, { name: "authenticatedUser" })
   public authenticatedUser(@AuthenticatedUser() user: any): string {
     return user.preferred_username;
+  }
+
+  @RealmRoles([REALM_ROLE])
+  @Query(() => String, { name: "token" })
+  public token(@Token() token: string): string {
+    return token;
   }
 }

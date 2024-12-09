@@ -1,14 +1,14 @@
+import { InjectLogger, LoggerService } from "@flowcore/microservice";
 import {
   CanActivate,
   ExecutionContext,
   Injectable,
-  UnauthorizedException,
+  UnauthorizedException
 } from "@nestjs/common";
-import { InjectLogger, LoggerService } from "@flowcore/microservice";
-import dayjs from "dayjs";
-import { OidcProtectService } from "../oidc-protect/oidc-protect.service";
 import { Reflector } from "@nestjs/core";
+import dayjs from "dayjs";
 import { PUBLIC_OPERATION_KEY } from "../decorator/public.decorator";
+import { OidcProtectService } from "../oidc-protect/oidc-protect.service";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -56,7 +56,7 @@ export class AuthGuard implements CanActivate {
     }
 
     request.authenticatedUser = decodedToken;
-
+    request.token = token;
     return true;
   }
 
@@ -78,6 +78,7 @@ export class AuthGuard implements CanActivate {
       }
 
       request.authenticatedUser = decodedToken;
+      request.token = token;
       return true;
     } catch (e) {
       return true;

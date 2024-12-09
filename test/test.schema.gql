@@ -15,5 +15,6 @@ type Query {
   realmRole: String!
   resourceRole: String!
   authenticatedUser: String!
+  token: String!
   testPerson: TestPerson!
 }
