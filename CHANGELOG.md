@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v3.3.0...v3.4.0) (2024-12-09)
+
+
+### Features
+
+* added token decorator ([fe7f2f6](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/commit/fe7f2f657798fe56c67ff8ed437054859623dcd6))
+
 ## [3.3.0](https://github.com/flowcore-io/library-nestjs-oidc-protect-ts/compare/v3.2.1...v3.3.0) (2024-06-17)
 
 
